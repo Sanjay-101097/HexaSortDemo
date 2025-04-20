@@ -1,0 +1,93 @@
+{
+  "ver": "2.1.10",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "9606de70-d46a-4405-b308-2ca69df119e4",
+  "files": [],
+  "subMetas": {
+    "bcca5": {
+      "importer": "gltf-mesh",
+      "uuid": "9606de70-d46a-4405-b308-2ca69df119e4@bcca5",
+      "displayName": "",
+      "id": "bcca5",
+      "name": "UnnamedMesh.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "2deab": {
+      "importer": "gltf-material",
+      "uuid": "9606de70-d46a-4405-b308-2ca69df119e4@2deab",
+      "displayName": "",
+      "id": "2deab",
+      "name": "Default_Material.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "5ca1b": {
+      "importer": "gltf-scene",
+      "uuid": "9606de70-d46a-4405-b308-2ca69df119e4@5ca1b",
+      "displayName": "",
+      "id": "5ca1b",
+      "name": "HexaBase.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "legacyFbxImporter": false,
+    "redirect": "9606de70-d46a-4405-b308-2ca69df119e4@5ca1b",
+    "assetFinder": {
+      "meshes": [
+        "9606de70-d46a-4405-b308-2ca69df119e4@bcca5"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "9606de70-d46a-4405-b308-2ca69df119e4@2deab"
+      ],
+      "scenes": [
+        "9606de70-d46a-4405-b308-2ca69df119e4@5ca1b"
+      ]
+    },
+    "meshOptimizer": true,
+    "meshOptimizerOptions": {
+      "sa": false,
+      "si": 1,
+      "kn": true
+    },
+    "tangents": 1,
+    "morphNormals": 1,
+    "disableMeshSplit": true,
+    "fbx": {
+      "animationBakeRate": 60,
+      "promoteSingleRootNode": false,
+      "preferLocalTimeSpan": false
+    },
+    "skipValidation": false,
+    "useVertexColors": false,
+    "normals": 2
+  }
+}

@@ -1,5 +1,5 @@
 
-import { _decorator, Camera, ColliderComponent, Component, EventTouch, geometry, input, Input, PhysicsSystem, setDisplayStats, tween, Vec3,Node, AudioClip, AudioSource } from 'cc';
+import { _decorator, Camera, ColliderComponent, Component, EventTouch, geometry, input, Input, PhysicsSystem, setDisplayStats, tween, Vec3,Node, AudioClip, AudioSource, Prefab, instantiate } from 'cc';
 import { tileCreation } from './tileCreation';
 const { ccclass, property } = _decorator;
 
@@ -10,6 +10,9 @@ export class GameManager extends Component {
 
     @property(Node)
     Canvas: Node = null;
+
+    @property(Prefab)
+    WinParticle: Prefab = null;
     
     @property(AudioClip)
     AudioClips: AudioClip[] = [];
@@ -222,6 +225,17 @@ export class GameManager extends Component {
             }
         }
         this.tweenFunc();
+        let particlePos = this.items[this.items.length-1].children[5].getWorldPosition();
+        const particle = instantiate(this.WinParticle);
+        particle.parent = this.node.parent;
+        particle.setPosition(particlePos);
+        tween(particle)
+            .to(2.4, { position: new Vec3(particle.position.x, particle.position.y-14.4, particle.position.z) })
+            .call(() => {
+                particle.destroy();
+            })
+            .start();
+
     }
     items= []
     tweenFunc() {

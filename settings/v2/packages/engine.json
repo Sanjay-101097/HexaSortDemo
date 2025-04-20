@@ -8,6 +8,7 @@
       "gfx-webgl",
       "gfx-webgl2",
       "marionette",
+      "particle",
       "physics-ammo",
       "primitive",
       "tween",
@@ -37,7 +38,7 @@
         "_value": true
       },
       "particle": {
-        "_value": false
+        "_value": true
       },
       "physics": {
         "_value": true,

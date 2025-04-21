@@ -1,5 +1,5 @@
 
-import { _decorator, Camera, ColliderComponent, Component, EventTouch, geometry, input, Input, PhysicsSystem, setDisplayStats, tween, Vec3,Node, AudioClip, AudioSource, Prefab, instantiate } from 'cc';
+import { _decorator, Camera, ColliderComponent, Component, EventTouch, geometry, input, Input, PhysicsSystem, setDisplayStats, tween, Vec3,Node, AudioClip, AudioSource, Prefab, instantiate, Tween } from 'cc';
 import { tileCreation } from './tileCreation';
 const { ccclass, property } = _decorator;
 
@@ -18,7 +18,7 @@ export class GameManager extends Component {
     AudioClips: AudioClip[] = [];
 
     @property(Camera)
-    readonly cameraCom!: Camera;
+    cameraCom!: Camera;
 
 
     private _ray: geometry.Ray = new geometry.Ray();
@@ -41,8 +41,47 @@ export class GameManager extends Component {
         this.tileCreation.tileGenerate(12, 1);
         this.tileCreation.tileGenerate(6, 2);
         setDisplayStats(false);
+        this.handTween();
+        // const designHeight = 720; // your base design height
+        // const screenHeight = screen.availHeight;
+        // const scaleRatio = screenHeight / designHeight;
+
+        // // Your base orthoHeight (half of desired height in world units)
+        // const baseOrthoHeight = 5; // Example value
+
+        // // Scale accordingly
+        // this.cameraCom.orthoHeight = baseOrthoHeight * scaleRatio;
+        const cameraZ = Math.abs(this.cameraCom.node.position.z); // distance from camera to object
+        const fov = this.cameraCom.fov; // in degrees
+
+        // Convert FOV to radians
+        const fovInRadians = (fov * Math.PI) / 180;
+
+        // Half height using trigonometry (tan)
+        const halfHeight = Math.tan(fovInRadians / 2) * cameraZ;
+
+        // Total visible world height:
+        const visibleWorldHeight = halfHeight * 2;
+
+
 
     }
+    
+    anim:Tween<Node>;
+    handnode: Node;
+    handTween(){
+        this.Canvas.active = true;
+        this.handnode = this.Canvas.getChildByName("hand");
+        this.handnode.setPosition(-120,0,0)
+        this.anim = tween(this.handnode)
+        .sequence(
+            tween().to(1.2, { position: new Vec3(230, 0, 0) }),
+            tween().to(0.01, { position: new Vec3(-120, 0, 0) })
+        )
+        .repeatForever()
+        .start();
+
+        }
 
     start() {
         this.setsData = this.tileCreation.setArrayData;
@@ -64,6 +103,10 @@ export class GameManager extends Component {
     
     private enable: boolean = false;
     onTouchStart(event: EventTouch) {
+        
+        this.anim.stop();
+        this.handnode.active = false;
+        this.Canvas.active = false;
         const touch = event.touch!;
         this._touchStartX = touch.getLocationX();
         this.cameraCom.screenPointToRay(touch.getLocationX(), touch.getLocationY(), this._ray);
@@ -172,6 +215,8 @@ export class GameManager extends Component {
         }
         if(this.count > 15){
             this.Canvas.active = true;
+            this.Canvas.children[1].active = true;
+            this.Canvas.children[2].active = true;
             input.off(Input.EventType.TOUCH_START, this.onTouchStart, this);
             input.off(Input.EventType.TOUCH_MOVE, this.onTouchMove, this);
             input.off(Input.EventType.TOUCH_END, this.onTouchEnd, this);

@@ -49,7 +49,7 @@ export class tileCreation extends Component {
                     hexagonTile.setPosition(0, i * 0.3, 0);
                 }
             }
-            if (setdata.length >= 18){
+            if (setdata.length >= 18) {
                 this.setIdexArrayData.push(setIndexData);
                 this.setArrayData.push(setdata);
             }
@@ -58,7 +58,10 @@ export class tileCreation extends Component {
     }
 
     placeColor(hexagonTile: Node, colorIndex: number) {
-        hexagonTile.getComponent(MeshRenderer).materials[0] = this.colorMaterials[colorIndex];
+        let material = this.colorMaterials[colorIndex];
+
+        hexagonTile.getComponent(MeshRenderer).setMaterial(material, 0);
+
     }
 
     selectColor(): number {
